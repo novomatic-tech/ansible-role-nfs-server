@@ -37,4 +37,3 @@
     src: exports.j2
     dest: /etc/exports
   notify: Reaload exports
-

@@ -16,6 +16,6 @@
     enabled: "yes"
   retries: 3
   when: not ansible_check_mode and ansible_facts.services is defined
-  
+
 - name: Reaload exports
   command: exportfs -ra
