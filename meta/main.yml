@@ -1,0 +1,23 @@
+galaxy_info:
+  author: Karol Chrapek
+  description: Small role with basic options to setup nfs server
+  role_name: nfs_server
+  company: Novomatic Technologies Poland
+
+  license: Apache v2
+
+  min_ansible_version: 2.5
+  platforms:
+    - name: EL
+      versions:
+        - all
+    - name: Fedora
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+  galaxy_tags:
+    - nfs
+
+dependencies: []

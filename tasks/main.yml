@@ -1,0 +1,40 @@
+---
+# tasks file for nfs-server
+
+- name: Install nfs packages
+  yum:
+    name: nfs-utils
+    state: present
+  notify: Restart nfs
+
+- name: Create nfs main directory
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: nfsnobody
+    group: nfsnobody
+    mode: 0755
+  loop: "{{ nfs_exports }}"
+
+- name: Gather service facts from the host
+  service_facts:
+
+- name: Check if firewalld package is installed
+  yum:
+    list: firewalld
+  register: firewalld_package
+
+- name: Allow nfs traffic on firewalld
+  firewalld:
+    service: nfs
+    permanent: true
+    state: enabled
+  when: firewalld_package|json_query("results[?name=='firewalld'].yumstate") == 'installed'
+  notify: Reload firewalld
+
+- name: Add config file
+  template:
+    src: exports.j2
+    dest: /etc/exports
+  notify: Reaload exports
+

@@ -1,0 +1,10 @@
+---
+# defaults file for nfs-server
+
+default_options: "rw,sync,no_subtree_check,no_root_squash"
+
+# nfs_exports:
+#   - path: /var/lib/nfs/servers
+#     acls:
+#       - host: "172.21.37.*"
+#       - host: "192.168.1.20"

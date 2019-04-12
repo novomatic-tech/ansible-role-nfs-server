@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+
+{% if nfs_exports is defined %}
+{% for export in nfs_exports %}
+{{ export['path'] }}
+{%- for acl in export.acls -%}
+{{ "  " if loop.first else '' }}{{ acl['host'] }}({{ acl['options']|default(default_options)}})
+{%- endfor %}
+{% endfor %}
+{% endif %}
