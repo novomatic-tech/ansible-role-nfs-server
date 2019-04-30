@@ -37,3 +37,16 @@
     src: exports.j2
     dest: /etc/exports
   notify: Reaload exports
+
+- name: Update cron jobs
+  cron:
+    name: "{{ item.1.job_name }}"
+    day: "{{ item.1.day | default(omit) }}"
+    hour: "{{ item.1.hour | default(0) }}"
+    minute: "{{ item.1.minute | default(0) }}"
+    month: "{{ item.1.month | default(omit) }}"
+    weekday: "{{ item.1.weekday | default(omit) }}"
+    job: "{{ item.1.command | default(omit) }}"
+    user: "{{ item.1.user | default(omit) }}"
+    state: "{{ item.1.state | default(omit) }}"
+  loop: "{{ query('subelements', nfs_exports, 'cron_jobs', {'skip_missing': True}) }}"

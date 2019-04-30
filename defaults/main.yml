@@ -8,3 +8,13 @@ default_options: "rw,sync,no_subtree_check,no_root_squash"
 #     acls:
 #       - host: "172.21.37.*"
 #       - host: "192.168.1.20"
+#     cron_jobs:
+#       - job_name: Archive old folders
+#         day: *
+#         weekday: *
+#         hour: 23
+#         minute: 0
+#         month: *
+#         user: root
+#         state: present
+#         command: 'find /var/lib/nfs/servers/ -type d -mtime +14 -name "archived-*" -prune -exec rm -rf {} \;'
