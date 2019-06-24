@@ -29,7 +29,7 @@
     service: nfs
     permanent: true
     state: enabled
-  when: firewalld_package|json_query("results[?name=='firewalld'].yumstate") == 'installed'
+  when: firewalld_package|json_query("results[?repo=='installed' && name == 'firewalld']")
   notify: Reload firewalld
 
 - name: Add config file
